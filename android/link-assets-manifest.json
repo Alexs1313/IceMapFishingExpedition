@@ -1,0 +1,17 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/PassionOne-Black.ttf",
+      "sha1": "8b2675552ba5e4af55205116e80909e929a0f12d"
+    },
+    {
+      "path": "assets/fonts/PassionOne-Bold.ttf",
+      "sha1": "8529424dcfb3c01d284434f45dc6331e0ef283f1"
+    },
+    {
+      "path": "assets/fonts/PassionOne-Regular.ttf",
+      "sha1": "5acf813f59c57f10555e64824fccbf588001b478"
+    }
+  ]
+}

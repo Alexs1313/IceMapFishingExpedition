@@ -11,7 +11,14 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		8946FD5324CA4FCA9FF25FA6 /* PassionOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4B713039DB4CB095EAD3BF /* PassionOne-Regular.ttf */; };
 		8C21E07AE2C3310CBB93BAF7 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		C57E30252EC7451FAE3B9FA0 /* PassionOne-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 870CFEE26F5E41DFA16626BB /* PassionOne-Bold.ttf */; };
+		C91DD30B3B234757AF8895AB /* PassionOne-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D7B253EB15840D1AB08A263 /* PassionOne-Black.ttf */; };
+		D1F211372EE2FCCE00BF108F /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F211362EE2FCCE00BF108F /* AVKit.framework */; };
+		D1F211392EE2FCD400BF108F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F211382EE2FCD400BF108F /* AVFoundation.framework */; };
+		D1F2113B2EE2FCDA00BF108F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F2113A2EE2FCDA00BF108F /* AudioToolbox.framework */; };
+		D1F2113D2EE2FD1900BF108F /* summer-nights-203094.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D1F2113C2EE2FD1900BF108F /* summer-nights-203094.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,11 +27,18 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = IceMapFishingExpedition/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = IceMapFishingExpedition/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-IceMapFishingExpedition.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceMapFishingExpedition.debug.xcconfig"; path = "Target Support Files/Pods-IceMapFishingExpedition/Pods-IceMapFishingExpedition.debug.xcconfig"; sourceTree = "<group>"; };
+		4D7B253EB15840D1AB08A263 /* PassionOne-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "PassionOne-Black.ttf"; path = "../assets/fonts/PassionOne-Black.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-IceMapFishingExpedition.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IceMapFishingExpedition.release.xcconfig"; path = "Target Support Files/Pods-IceMapFishingExpedition/Pods-IceMapFishingExpedition.release.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-IceMapFishingExpedition.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IceMapFishingExpedition.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = IceMapFishingExpedition/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = IceMapFishingExpedition/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		870CFEE26F5E41DFA16626BB /* PassionOne-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "PassionOne-Bold.ttf"; path = "../assets/fonts/PassionOne-Bold.ttf"; sourceTree = "<group>"; };
+		D1F211362EE2FCCE00BF108F /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		D1F211382EE2FCD400BF108F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D1F2113A2EE2FCDA00BF108F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D1F2113C2EE2FD1900BF108F /* summer-nights-203094.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "summer-nights-203094.mp3"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		ED4B713039DB4CB095EAD3BF /* PassionOne-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "PassionOne-Regular.ttf"; path = "../assets/fonts/PassionOne-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +46,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1F2113B2EE2FCDA00BF108F /* AudioToolbox.framework in Frameworks */,
+				D1F211392EE2FCD400BF108F /* AVFoundation.framework in Frameworks */,
+				D1F211372EE2FCCE00BF108F /* AVKit.framework in Frameworks */,
 				0C80B921A6F3F58F76C31292 /* libPods-IceMapFishingExpedition.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,6 +71,9 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D1F2113A2EE2FCDA00BF108F /* AudioToolbox.framework */,
+				D1F211382EE2FCD400BF108F /* AVFoundation.framework */,
+				D1F211362EE2FCCE00BF108F /* AVKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				5DCACB8F33CDC322A6C60F78 /* libPods-IceMapFishingExpedition.a */,
 			);
@@ -75,6 +95,8 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				D1F2113C2EE2FD1900BF108F /* summer-nights-203094.mp3 */,
+				BDFFA14898E9486F8FFA5AFA /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -96,6 +118,17 @@
 				5709B34CF0A7D63546082F79 /* Pods-IceMapFishingExpedition.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		BDFFA14898E9486F8FFA5AFA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4D7B253EB15840D1AB08A263 /* PassionOne-Black.ttf */,
+				870CFEE26F5E41DFA16626BB /* PassionOne-Bold.ttf */,
+				ED4B713039DB4CB095EAD3BF /* PassionOne-Regular.ttf */,
+			);
+			name = Resources;
+			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,9 +191,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1F2113D2EE2FD1900BF108F /* summer-nights-203094.mp3 in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				8C21E07AE2C3310CBB93BAF7 /* PrivacyInfo.xcprivacy in Resources */,
+				C91DD30B3B234757AF8895AB /* PassionOne-Black.ttf in Resources */,
+				C57E30252EC7451FAE3B9FA0 /* PassionOne-Bold.ttf in Resources */,
+				8946FD5324CA4FCA9FF25FA6 /* PassionOne-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
