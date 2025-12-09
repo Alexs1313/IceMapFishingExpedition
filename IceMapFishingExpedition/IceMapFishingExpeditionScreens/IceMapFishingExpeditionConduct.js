@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: '#fff',
     fontFamily: 'PassionOne-Regular',
+    width: '80%',
   },
   iceMapIntroCard: {
     width: 356,

@@ -212,61 +212,63 @@ export default function IceMapFishingExpeditionPlaces() {
               </View>
             </ImageBackground>
 
-            <ImageBackground
-              source={require('../../assets/images/icemapdetcard.png')}
-              style={styles.iceMapDetailsCard}
-            >
-              <View
-                style={{
-                  alignItems: 'center',
-                  paddingTop: 18,
-                  paddingHorizontal: 20,
-                }}
+            <View>
+              <ImageBackground
+                source={require('../../assets/images/icemapdetcard.png')}
+                style={styles.iceMapDetailsCard}
               >
-                <Text style={styles.iceMapDetailsTitle}>
-                  {iceMapSelectedPlace.title}
-                </Text>
-                <Text style={styles.iceMapDetailsCoords}>
-                  {iceMapSelectedPlace.coords}
-                </Text>
+                <View
+                  style={{
+                    alignItems: 'center',
+                    paddingTop: 18,
+                    paddingHorizontal: 20,
+                  }}
+                >
+                  <Text style={styles.iceMapDetailsTitle}>
+                    {iceMapSelectedPlace.title}
+                  </Text>
+                  <Text style={styles.iceMapDetailsCoords}>
+                    {iceMapSelectedPlace.coords}
+                  </Text>
 
-                <Text style={styles.iceMapDetailsText}>
-                  {iceMapSelectedPlace.text}
-                </Text>
-                <View style={styles.iceMapIconRow}>
-                  <TouchableOpacity
-                    onPress={() => iceMapSharePlace(iceMapSelectedPlace)}
-                    activeOpacity={0.7}
-                  >
-                    <Image
-                      source={require('../../assets/images/icemapshr.png')}
-                    />
-                  </TouchableOpacity>
-
-                  <TouchableOpacity
-                    onPress={() => iceMapOpenMap(iceMapSelectedPlace.coords)}
-                    activeOpacity={0.7}
-                  >
-                    <Image
-                      source={require('../../assets/images/icemapmap.png')}
-                    />
-                  </TouchableOpacity>
-
-                  <TouchableOpacity
-                    onPress={() => iceMapToggleFavorite(iceMapSelectedPlace.id)}
-                    activeOpacity={0.7}
-                  >
-                    <Image
-                      source={
-                        iceMapIsFavorite(iceMapSelectedPlace.id)
-                          ? require('../../assets/images/icemapsvd.png')
-                          : require('../../assets/images/icemapsv.png')
-                      }
-                    />
-                  </TouchableOpacity>
+                  <Text style={styles.iceMapDetailsText}>
+                    {iceMapSelectedPlace.text}
+                  </Text>
                 </View>
+              </ImageBackground>
+              <View style={styles.iceMapIconRow}>
+                <TouchableOpacity
+                  onPress={() => iceMapSharePlace(iceMapSelectedPlace)}
+                  activeOpacity={0.7}
+                >
+                  <Image
+                    source={require('../../assets/images/icemapshr.png')}
+                  />
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => iceMapOpenMap(iceMapSelectedPlace.coords)}
+                  activeOpacity={0.7}
+                >
+                  <Image
+                    source={require('../../assets/images/icemapmap.png')}
+                  />
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => iceMapToggleFavorite(iceMapSelectedPlace.id)}
+                  activeOpacity={0.7}
+                >
+                  <Image
+                    source={
+                      iceMapIsFavorite(iceMapSelectedPlace.id)
+                        ? require('../../assets/images/icemapsvd.png')
+                        : require('../../assets/images/icemapsv.png')
+                    }
+                  />
+                </TouchableOpacity>
               </View>
-            </ImageBackground>
+            </View>
           </View>
         )}
 
@@ -312,7 +314,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: height * 0.05,
     alignItems: 'center',
-    paddingBottom: 20,
+    paddingBottom: 50,
   },
   iceMapHeaderRow: {
     flexDirection: 'row',
@@ -401,6 +403,7 @@ const styles = StyleSheet.create({
     width: 356,
     height: 306,
     padding: 20,
+    paddingTop: 15,
   },
   iceMapDetailsImg: {
     width: '90%',
@@ -409,7 +412,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   iceMapDetailsTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'PassionOne-Regular',
     textAlign: 'center',
   },
@@ -417,22 +420,23 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'PassionOne-Regular',
     textAlign: 'center',
-    marginBottom: 10,
+    marginBottom: 8,
     color: '#083571',
-    marginTop: 5,
+    marginTop: 3,
   },
   iceMapDetailsText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'PassionOne-Regular',
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 10,
     color: '#000',
   },
   iceMapIconRow: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 10,
     gap: 14,
+    position: 'absolute ',
+    bottom: 65,
   },
   iceMapBackBtn: {
     marginRight: 10,

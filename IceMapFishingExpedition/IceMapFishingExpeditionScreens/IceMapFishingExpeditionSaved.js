@@ -210,7 +210,7 @@ export default function IceMapFishingExpeditionSaved() {
                   style={{
                     alignItems: 'center',
                     paddingTop: 18,
-                    paddingHorizontal: 30,
+                    paddingHorizontal: 20,
                   }}
                 >
                   <Text style={styles.iceMapDetailsTitle}>
@@ -225,7 +225,6 @@ export default function IceMapFishingExpeditionSaved() {
                   </Text>
                 </View>
               </ImageBackground>
-
               <View style={styles.iceMapIconRow}>
                 <TouchableOpacity
                   onPress={() => iceMapSharePlace(iceMapSelectedPlace)}
@@ -250,7 +249,11 @@ export default function IceMapFishingExpeditionSaved() {
                   activeOpacity={0.7}
                 >
                   <Image
-                    source={require('../../assets/images/icemapsvd.png')}
+                    source={
+                      iceMapIsFavorite(iceMapSelectedPlace.id)
+                        ? require('../../assets/images/icemapsvd.png')
+                        : require('../../assets/images/icemapsv.png')
+                    }
                   />
                 </TouchableOpacity>
               </View>
@@ -411,7 +414,7 @@ const styles = StyleSheet.create({
     width: 356,
     height: 306,
     padding: 20,
-    marginBottom: 20,
+    paddingTop: 15,
   },
   iceMapDetailsImg: {
     width: '90%',
@@ -420,31 +423,31 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   iceMapDetailsTitle: {
-    fontSize: 20,
-    textAlign: 'center',
+    fontSize: 18,
     fontFamily: 'PassionOne-Regular',
+    textAlign: 'center',
   },
   iceMapDetailsCoords: {
     fontSize: 12,
-    textAlign: 'center',
-    marginBottom: 10,
-    color: '#083571',
     fontFamily: 'PassionOne-Regular',
+    textAlign: 'center',
+    marginBottom: 8,
+    color: '#083571',
+    marginTop: 3,
   },
   iceMapDetailsText: {
-    fontSize: 14,
-    textAlign: 'center',
-    color: '#000',
-    marginBottom: 20,
+    fontSize: 12,
     fontFamily: 'PassionOne-Regular',
+    textAlign: 'center',
+    marginBottom: 10,
+    color: '#000',
   },
   iceMapIconRow: {
     flexDirection: 'row',
     justifyContent: 'center',
     gap: 14,
-    position: 'absolute',
-    bottom: 10,
-    alignSelf: 'center',
+    position: 'absolute ',
+    bottom: 65,
   },
   iceMapEmptyText: {
     fontSize: 18,

@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   iceMapWelcomeTitle: {
-    fontSize: 20,
+    fontSize: 19,
     color: '#000',
     textAlign: 'center',
     fontFamily: 'PassionOne-Regular',

@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   iceMapBtnTitle: {
-    fontSize: 24,
+    fontSize: 21,
     color: '#fff',
     textAlign: 'center',
     fontFamily: 'PassionOne-Regular',

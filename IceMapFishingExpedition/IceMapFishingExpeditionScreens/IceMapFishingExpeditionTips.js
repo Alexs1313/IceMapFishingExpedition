@@ -243,21 +243,21 @@ const styles = StyleSheet.create({
   },
   iceMapQuoteCard: {
     width: 356,
-    minHeight: 319,
+    minHeight: 306,
     padding: 25,
     alignItems: 'center',
     marginTop: 10,
   },
   iceMapQuoteInner: {
-    paddingTop: 13,
+    paddingTop: 10,
     alignItems: 'center',
   },
   iceMapQuoteText: {
-    fontSize: 18,
+    fontSize: 16,
     textAlign: 'center',
     color: '#000',
     fontFamily: 'PassionOne-Regular',
-    marginBottom: 10,
+    marginBottom: 3,
   },
   iceMapActionBtn: {
     width: 205,
