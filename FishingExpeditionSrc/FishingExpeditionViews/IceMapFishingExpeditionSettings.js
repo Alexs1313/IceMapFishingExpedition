@@ -5,14 +5,15 @@ import {
   StyleSheet,
   Image,
   ImageBackground,
-  TouchableOpacity,
+  TouchableOpacity as CustomTouchable,
   Dimensions,
   Platform,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import IceMapFishingExpeditionLayout from '../IceMapFishingExpeditionComponents/IceMapFishingExpeditionLayout';
+
 import { useNavigation } from '@react-navigation/native';
-import { useStore } from '../IceMapFishingExpeditionStore/iceMapFishingExpeditionContext';
+import { useStore } from '../FishingExpeditionStore/iceMapFishingExpeditionContext';
+import FishingExpeditionCustomBackground from '../FishingExpeditionCustomComponents/FishingExpeditionCustomBackground';
 
 const { height } = Dimensions.get('window');
 
@@ -33,15 +34,15 @@ export default function IceMapFishingExpeditionSettings() {
   };
 
   return (
-    <IceMapFishingExpeditionLayout>
+    <FishingExpeditionCustomBackground>
       <View style={styles.iceMapContainer}>
         <View style={styles.iceMapHeaderRow}>
-          <TouchableOpacity
+          <CustomTouchable
             onPress={() => navigation.goBack()}
             activeOpacity={0.7}
           >
             <Image source={require('../../assets/images/icemapbackbtn.png')} />
-          </TouchableOpacity>
+          </CustomTouchable>
 
           <Text style={styles.iceMapHeaderTitle}>SETTINGS</Text>
         </View>
@@ -68,7 +69,7 @@ export default function IceMapFishingExpeditionSettings() {
                   Here you can customize the app for yourself
                 </Text>
 
-                <TouchableOpacity
+                <CustomTouchable
                   onPress={() => setIceMapShowIntro(false)}
                   activeOpacity={0.9}
                 >
@@ -78,7 +79,7 @@ export default function IceMapFishingExpeditionSettings() {
                   >
                     <Text style={styles.iceMapOkayText}>OKAY</Text>
                   </ImageBackground>
-                </TouchableOpacity>
+                </CustomTouchable>
               </View>
             </ImageBackground>
           </View>
@@ -93,7 +94,7 @@ export default function IceMapFishingExpeditionSettings() {
               >
                 <Text style={styles.iceMapSettingsTitle}>MELODY</Text>
 
-                <TouchableOpacity
+                <CustomTouchable
                   onPress={() => iceMapToggleMusic(!isEnabledIceMapMusic)}
                   activeOpacity={0.8}
                 >
@@ -108,7 +109,7 @@ export default function IceMapFishingExpeditionSettings() {
                       {isEnabledIceMapMusic ? 'ON' : 'OFF'}
                     </Text>
                   </ImageBackground>
-                </TouchableOpacity>
+                </CustomTouchable>
               </ImageBackground>
             )}
 
@@ -118,7 +119,7 @@ export default function IceMapFishingExpeditionSettings() {
             >
               <Text style={styles.iceMapSettingsTitle}>Delete all saved</Text>
 
-              <TouchableOpacity
+              <CustomTouchable
                 onPress={iceMapDeleteAllSaved}
                 activeOpacity={0.8}
               >
@@ -128,12 +129,12 @@ export default function IceMapFishingExpeditionSettings() {
                 >
                   <Text style={styles.iceMapDeleteText}>Delete</Text>
                 </ImageBackground>
-              </TouchableOpacity>
+              </CustomTouchable>
             </ImageBackground>
           </View>
         )}
       </View>
-    </IceMapFishingExpeditionLayout>
+    </FishingExpeditionCustomBackground>
   );
 }
 

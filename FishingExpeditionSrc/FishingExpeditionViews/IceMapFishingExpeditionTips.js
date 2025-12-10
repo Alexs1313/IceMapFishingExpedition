@@ -1,25 +1,24 @@
 import React, { useState, useRef } from 'react';
-import IceMapFishingExpeditionLayout from '../IceMapFishingExpeditionComponents/IceMapFishingExpeditionLayout';
 import { useNavigation } from '@react-navigation/native';
-import { iceMapFishingTips } from '../IceMapFishingExpeditionConsts/iceMapFishingTips';
+import { iceMapFishingTips } from '../FishingExpeditionConsts/iceMapFishingTips';
 import {
   View,
   Text,
   StyleSheet,
   Image,
   ImageBackground,
-  TouchableOpacity,
+  TouchableOpacity as CustomTouchable,
   Dimensions,
   Animated,
   Easing,
   Share,
 } from 'react-native';
+import FishingExpeditionCustomBackground from '../FishingExpeditionCustomComponents/FishingExpeditionCustomBackground';
 
 const { height } = Dimensions.get('window');
 
 export default function IceMapFishingExpeditionTips() {
   const navigation = useNavigation();
-
   const [iceMapShowIntro, setIceMapShowIntro] = useState(true);
   const [iceMapLoading, setIceMapLoading] = useState(false);
   const [iceMapQuote, setIceMapQuote] = useState(null);
@@ -27,13 +26,21 @@ export default function IceMapFishingExpeditionTips() {
 
   const iceMapPulseAnim = useRef(new Animated.Value(1)).current;
 
+  const iceMapShareQuote = async () => {
+    if (!iceMapQuote) return;
+
+    await Share.share({
+      message: iceMapQuote.join('\n\n'),
+    });
+  };
+
   const iceMapStartLoader = () => {
     setIceMapShowIntro(false);
     setIceMapLoading(true);
     setIceMapQuote(null);
 
-    const color = Math.random() < 0.5 ? 'red' : 'gold';
-    setIceMapFishColor(color);
+    const fishColor = Math.random() < 0.5 ? 'red' : 'gold';
+    setIceMapFishColor(fishColor);
 
     iceMapPulseAnim.setValue(1);
 
@@ -56,39 +63,33 @@ export default function IceMapFishingExpeditionTips() {
     ).start();
 
     setTimeout(() => {
-      if (color === 'red') {
-        const randomTip =
+      if (fishColor === 'red') {
+        const randomFishingExpeditionTip =
           iceMapFishingTips[
             Math.floor(Math.random() * iceMapFishingTips.length)
           ];
-        setIceMapQuote([randomTip]);
+        setIceMapQuote([randomFishingExpeditionTip]);
       } else {
-        const shuffled = [...iceMapFishingTips].sort(() => Math.random() - 0.5);
-        setIceMapQuote(shuffled.slice(0, 3));
+        const shuffledTips = [...iceMapFishingTips].sort(
+          () => Math.random() - 0.5,
+        );
+        setIceMapQuote(shuffledTips.slice(0, 3));
       }
 
       setIceMapLoading(false);
     }, 3000);
   };
 
-  const iceMapShareQuote = async () => {
-    if (!iceMapQuote) return;
-
-    await Share.share({
-      message: iceMapQuote.join('\n\n'),
-    });
-  };
-
   return (
-    <IceMapFishingExpeditionLayout>
+    <FishingExpeditionCustomBackground>
       <View style={styles.iceMapContainer}>
         <View style={styles.iceMapHeaderRow}>
-          <TouchableOpacity
+          <CustomTouchable
             onPress={() => navigation.goBack()}
             activeOpacity={0.7}
           >
             <Image source={require('../../assets/images/icemapbackbtn.png')} />
-          </TouchableOpacity>
+          </CustomTouchable>
 
           <Text style={styles.iceMapHeaderTitle}>FISHING TIPS</Text>
         </View>
@@ -110,7 +111,7 @@ export default function IceMapFishingExpeditionTips() {
                   do on the ice today. Red will show one tip, gold — three.
                 </Text>
 
-                <TouchableOpacity
+                <CustomTouchable
                   onPress={iceMapStartLoader}
                   activeOpacity={0.9}
                 >
@@ -120,7 +121,7 @@ export default function IceMapFishingExpeditionTips() {
                   >
                     <Text style={styles.iceMapStartText}>START</Text>
                   </ImageBackground>
-                </TouchableOpacity>
+                </CustomTouchable>
               </View>
             </ImageBackground>
           </View>
@@ -161,27 +162,27 @@ export default function IceMapFishingExpeditionTips() {
               </View>
             </ImageBackground>
 
-            <TouchableOpacity onPress={iceMapShareQuote} activeOpacity={0.8}>
+            <CustomTouchable onPress={iceMapShareQuote} activeOpacity={0.8}>
               <ImageBackground
                 source={require('../../assets/images/icemapconfbtn.png')}
                 style={styles.iceMapActionBtn}
               >
                 <Text style={styles.iceMapActionBtnText}>SHARE</Text>
               </ImageBackground>
-            </TouchableOpacity>
+            </CustomTouchable>
 
-            <TouchableOpacity onPress={iceMapStartLoader} activeOpacity={0.8}>
+            <CustomTouchable onPress={iceMapStartLoader} activeOpacity={0.8}>
               <ImageBackground
                 source={require('../../assets/images/icemapconfbtn.png')}
                 style={styles.iceMapActionBtn}
               >
                 <Text style={styles.iceMapActionBtnText}>RESTART</Text>
               </ImageBackground>
-            </TouchableOpacity>
+            </CustomTouchable>
           </View>
         )}
       </View>
-    </IceMapFishingExpeditionLayout>
+    </FishingExpeditionCustomBackground>
   );
 }
 

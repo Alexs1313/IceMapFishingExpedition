@@ -4,22 +4,23 @@ import {
   StyleSheet,
   Image,
   ImageBackground,
-  TouchableOpacity,
+  TouchableOpacity as CustomTouchable,
   Dimensions,
   Share,
   Linking,
   Animated,
   Easing,
 } from 'react-native';
-import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import IceMapFishingExpeditionLayout from '../IceMapFishingExpeditionComponents/IceMapFishingExpeditionLayout';
+import React, { useState, useEffect } from 'react';
+
 import { useNavigation } from '@react-navigation/native';
-import { iceMapFishingPlaces } from '../IceMapFishingExpeditionConsts/iceMapFishingExpeditionPlaces';
+import { iceMapFishingPlaces } from '../FishingExpeditionConsts/iceMapFishingExpeditionPlaces';
+import FishingExpeditionCustomBackground from '../FishingExpeditionCustomComponents/FishingExpeditionCustomBackground';
 
 const { height } = Dimensions.get('window');
 
-export default function IceMapFishingExpeditionPlaces() {
+export default function IceMapFishingExpeditionSaved() {
   const navigation = useNavigation();
 
   const [iceMapShowIntro, setIceMapShowIntro] = useState(true);
@@ -38,20 +39,34 @@ export default function IceMapFishingExpeditionPlaces() {
     if (json) setIceMapFavorites(JSON.parse(json));
   };
 
-  const iceMapToggleFavorite = async id => {
-    let updated = [];
+  const iceMapIsFavoritePlace = id => iceMapFavorites.includes(id);
 
-    if (iceMapFavorites.includes(id)) {
-      updated = iceMapFavorites.filter(f => f !== id);
-    } else {
-      updated = [...iceMapFavorites, id];
-    }
-
-    setIceMapFavorites(updated);
-    await AsyncStorage.setItem('IceMapFavorites', JSON.stringify(updated));
+  const iceMapToggleFavoritePlace = async id => {
+    const updatedFavorites = iceMapFavorites.filter(f => f !== id);
+    setIceMapFavorites(updatedFavorites);
+    await AsyncStorage.setItem(
+      'IceMapFavorites',
+      JSON.stringify(updatedFavorites),
+    );
   };
 
-  const iceMapIsFavorite = id => iceMapFavorites.includes(id);
+  const iceMapOpenMap = coords => {
+    try {
+      const [latRaw, lonRaw] = coords.split(',');
+
+      let favoritesLat = latRaw.replace(/[^\d.-]/g, '').trim();
+      let favoritesLon = lonRaw.replace(/[^\d.-]/g, '').trim();
+
+      if (latRaw.includes('S')) favoritesLat = '-' + favoritesLat;
+      if (lonRaw.includes('W')) favoritesLon = '-' + favoritesLon;
+
+      Linking.openURL(
+        `https://www.google.com/maps/search/?api=1&query=${favoritesLat},${favoritesLon}`,
+      );
+    } catch (e) {
+      console.log('MAP ERROR:', e);
+    }
+  };
 
   const iceMapOpenPlace = place => {
     setIceMapSelectedPlace(place);
@@ -85,40 +100,26 @@ export default function IceMapFishingExpeditionPlaces() {
     } catch (e) {}
   };
 
-  const iceMapOpenMap = coordsString => {
-    try {
-      const [latRaw, lonRaw] = coordsString.split(',');
-
-      let lat = latRaw.replace(/[^\d.-]/g, '').trim();
-      if (latRaw.includes('S')) lat = '-' + lat;
-
-      let lon = lonRaw.replace(/[^\d.-]/g, '').trim();
-      if (lonRaw.includes('W')) lon = '-' + lon;
-
-      const url = `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
-      Linking.openURL(url);
-    } catch (e) {
-      console.log('MAP ERROR:', e);
-    }
-  };
+  const iceMapSavedPlaces = iceMapFishingPlaces.filter(p =>
+    iceMapFavorites.includes(p.id),
+  );
 
   return (
-    <IceMapFishingExpeditionLayout>
+    <FishingExpeditionCustomBackground>
       <View style={styles.iceMapContainer}>
         {!iceMapLoading && (
           <View style={styles.iceMapHeaderRow}>
-            <TouchableOpacity
+            <CustomTouchable
+              activeOpacity={0.7}
               onPress={() =>
                 iceMapShowDetails ? iceMapGoBackToList() : navigation.goBack()
               }
-              style={styles.iceMapBackBtn}
-              activeOpacity={0.7}
             >
               <Image
                 source={require('../../assets/images/icemapbackbtn.png')}
               />
-            </TouchableOpacity>
-            <Text style={styles.iceMapHeaderTitle}>LIST OF PLACE</Text>
+            </CustomTouchable>
+            <Text style={styles.iceMapHeaderTitle}>SAVED PLACES</Text>
           </View>
         )}
 
@@ -133,21 +134,14 @@ export default function IceMapFishingExpeditionPlaces() {
               source={require('../../assets/images/icemaprulescard.png')}
               style={styles.iceMapIntroCard}
             >
-              <View
-                style={{
-                  alignItems: 'center',
-                  paddingTop: 30,
-                  paddingHorizontal: 20,
-                  justifyContent: 'center',
-                }}
-              >
+              <View style={{ paddingTop: 30, alignItems: 'center' }}>
                 <Text style={styles.iceMapIntroText}>
-                  Choose the location that calls to you. Here are the best
-                  winter spots in the world — with photos, coordinates, and
-                  descriptions.
+                  Here are your favorite locations. When you return to them,
+                  you'll always know where the ice was calmest and the fishing
+                  was best.
                 </Text>
 
-                <TouchableOpacity
+                <CustomTouchable
                   onPress={() => setIceMapShowIntro(false)}
                   activeOpacity={0.9}
                 >
@@ -155,9 +149,9 @@ export default function IceMapFishingExpeditionPlaces() {
                     source={require('../../assets/images/icemapconfbtn.png')}
                     style={styles.iceMapOkayBtn}
                   >
-                    <Text style={styles.iceMapOkayText}>OKAY</Text>
+                    <Text style={styles.iceMapOkayText}>CLOSE</Text>
                   </ImageBackground>
-                </TouchableOpacity>
+                </CustomTouchable>
               </View>
             </ImageBackground>
           </View>
@@ -169,7 +163,6 @@ export default function IceMapFishingExpeditionPlaces() {
               flex: 1,
               justifyContent: 'flex-start',
               alignItems: 'center',
-              height: 700,
             }}
           >
             <Text style={styles.iceMapLoaderText}>
@@ -180,7 +173,7 @@ export default function IceMapFishingExpeditionPlaces() {
               style={{
                 transform: [{ translateY: iceMapHelicopterY }],
                 position: 'absolute',
-                bottom: 20,
+                bottom: 50,
                 width: '100%',
                 alignItems: 'center',
               }}
@@ -237,36 +230,38 @@ export default function IceMapFishingExpeditionPlaces() {
                 </View>
               </ImageBackground>
               <View style={styles.iceMapIconRow}>
-                <TouchableOpacity
+                <CustomTouchable
                   onPress={() => iceMapSharePlace(iceMapSelectedPlace)}
                   activeOpacity={0.7}
                 >
                   <Image
                     source={require('../../assets/images/icemapshr.png')}
                   />
-                </TouchableOpacity>
+                </CustomTouchable>
 
-                <TouchableOpacity
+                <CustomTouchable
                   onPress={() => iceMapOpenMap(iceMapSelectedPlace.coords)}
                   activeOpacity={0.7}
                 >
                   <Image
                     source={require('../../assets/images/icemapmap.png')}
                   />
-                </TouchableOpacity>
+                </CustomTouchable>
 
-                <TouchableOpacity
-                  onPress={() => iceMapToggleFavorite(iceMapSelectedPlace.id)}
+                <CustomTouchable
+                  onPress={() =>
+                    iceMapToggleFavoritePlace(iceMapSelectedPlace.id)
+                  }
                   activeOpacity={0.7}
                 >
                   <Image
                     source={
-                      iceMapIsFavorite(iceMapSelectedPlace.id)
+                      iceMapIsFavoritePlace(iceMapSelectedPlace.id)
                         ? require('../../assets/images/icemapsvd.png')
                         : require('../../assets/images/icemapsv.png')
                     }
                   />
-                </TouchableOpacity>
+                </CustomTouchable>
               </View>
             </View>
           </View>
@@ -274,7 +269,11 @@ export default function IceMapFishingExpeditionPlaces() {
 
         {!iceMapLoading && !iceMapShowDetails && !iceMapShowIntro && (
           <View style={{ alignItems: 'center' }}>
-            {iceMapFishingPlaces.map(p => (
+            {iceMapSavedPlaces.length === 0 && (
+              <Text style={styles.iceMapEmptyText}>No saved places yet.</Text>
+            )}
+
+            {iceMapSavedPlaces.map(p => (
               <ImageBackground
                 key={p.id}
                 source={require('../../assets/images/icemapdetcard.png')}
@@ -286,17 +285,36 @@ export default function IceMapFishingExpeditionPlaces() {
                   <Text style={styles.iceMapPlaceTitle}>{p.title}</Text>
                   <Text style={styles.iceMapPlaceCoords}>{p.coords}</Text>
 
-                  <TouchableOpacity
-                    onPress={() => iceMapOpenPlace(p)}
-                    activeOpacity={0.9}
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      gap: 20,
+                      marginTop: 10,
+                      top: 40,
+                    }}
                   >
-                    <ImageBackground
-                      source={require('../../assets/images/icemapconfbtn.png')}
-                      style={styles.iceMapOpenBtn}
+                    <CustomTouchable
+                      onPress={() => iceMapOpenPlace(p)}
+                      activeOpacity={0.7}
                     >
-                      <Text style={styles.iceMapOpenBtnText}>OPEN</Text>
-                    </ImageBackground>
-                  </TouchableOpacity>
+                      <ImageBackground
+                        source={require('../../assets/images/icemapconfbtn.png')}
+                        style={styles.iceMapOpenBtn}
+                      >
+                        <Text style={styles.iceMapOpenBtnText}>OPEN</Text>
+                      </ImageBackground>
+                    </CustomTouchable>
+
+                    <CustomTouchable
+                      onPress={() => iceMapToggleFavoritePlace(p.id)}
+                      style={styles.iceMapRemoveIcon}
+                      activeOpacity={0.7}
+                    >
+                      <Image
+                        source={require('../../assets/images/icemapsvd.png')}
+                      />
+                    </CustomTouchable>
+                  </View>
                 </View>
               </ImageBackground>
             ))}
@@ -305,7 +323,7 @@ export default function IceMapFishingExpeditionPlaces() {
           </View>
         )}
       </View>
-    </IceMapFishingExpeditionLayout>
+    </FishingExpeditionCustomBackground>
   );
 }
 
@@ -314,7 +332,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: height * 0.05,
     alignItems: 'center',
-    paddingBottom: 50,
+    paddingBottom: 20,
   },
   iceMapHeaderRow: {
     flexDirection: 'row',
@@ -332,14 +350,13 @@ const styles = StyleSheet.create({
     width: 356,
     minHeight: 319,
     padding: 25,
-    alignItems: 'center',
     justifyContent: 'center',
   },
   iceMapIntroText: {
     fontSize: 18,
-    fontFamily: 'PassionOne-Regular',
     color: '#000',
     textAlign: 'center',
+    fontFamily: 'PassionOne-Regular',
     marginBottom: 20,
   },
   iceMapOkayBtn: {
@@ -358,14 +375,13 @@ const styles = StyleSheet.create({
     minHeight: 311,
     padding: 20,
     marginBottom: 20,
-    position: 'relative',
   },
   iceMapPlaceImg: {
     width: '90%',
     height: 105,
-    alignSelf: 'center',
-    marginBottom: 12,
     borderRadius: 22,
+    marginBottom: 12,
+    alignSelf: 'center',
   },
   iceMapPlaceTitle: {
     fontSize: 20,
@@ -379,24 +395,25 @@ const styles = StyleSheet.create({
     color: '#083571',
     fontFamily: 'PassionOne-Regular',
   },
+  iceMapRemoveIcon: {
+    alignSelf: 'center',
+  },
   iceMapOpenBtn: {
-    width: 180,
-    height: 77,
+    width: 181,
+    height: 78,
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'center',
-    top: 30,
   },
   iceMapOpenBtnText: {
-    fontSize: 28,
+    fontSize: 22,
     color: '#fff',
     fontFamily: 'PassionOne-Regular',
   },
   iceMapLoaderText: {
     fontSize: 32,
     color: '#fff',
-    fontFamily: 'PassionOne-Regular',
     textAlign: 'center',
+    fontFamily: 'PassionOne-Regular',
     marginTop: 40,
   },
   iceMapDetailsCard: {
@@ -438,7 +455,10 @@ const styles = StyleSheet.create({
     position: 'absolute ',
     bottom: 65,
   },
-  iceMapBackBtn: {
-    marginRight: 10,
+  iceMapEmptyText: {
+    fontSize: 18,
+    color: '#fff',
+    marginTop: 40,
+    fontFamily: 'PassionOne-Regular',
   },
 });

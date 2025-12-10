@@ -1,11 +1,19 @@
 import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, Animated, Dimensions, Easing } from 'react-native';
-import IceMapFishingExpeditionLayout from './IceMapFishingExpeditionLayout';
+import { useNavigation } from '@react-navigation/native';
+import FishingExpeditionCustomBackground from './FishingExpeditionCustomBackground';
 
 const { height } = Dimensions.get('window');
 
-const IceMapFishingExpeditionLoader = () => {
+const FishingExpeditionCustomLoader = () => {
   const helicopterY = useRef(new Animated.Value(height * 0.1)).current;
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate('IceMapFishingExpeditionOnboard');
+    }, 3500);
+  }, []);
 
   useEffect(() => {
     Animated.timing(helicopterY, {
@@ -17,7 +25,7 @@ const IceMapFishingExpeditionLoader = () => {
   }, []);
 
   return (
-    <IceMapFishingExpeditionLayout>
+    <FishingExpeditionCustomBackground>
       <View style={styles.loadercnt}>
         <Animated.Image
           source={require('../../assets/images/icemapldr.png')}
@@ -30,7 +38,7 @@ const IceMapFishingExpeditionLoader = () => {
           resizeMode="contain"
         />
       </View>
-    </IceMapFishingExpeditionLayout>
+    </FishingExpeditionCustomBackground>
   );
 };
 
@@ -47,4 +55,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default IceMapFishingExpeditionLoader;
+export default FishingExpeditionCustomLoader;

@@ -1,6 +1,6 @@
 import { ImageBackground, ScrollView } from 'react-native';
 
-const IceMapFishingExpeditionLayout = ({ children }) => {
+const FishingExpeditionCustomBackground = ({ children }) => {
   return (
     <ImageBackground
       source={require('../../assets/images/icemapback.png')}
@@ -16,4 +16,4 @@ const IceMapFishingExpeditionLayout = ({ children }) => {
   );
 };
 
-export default IceMapFishingExpeditionLayout;
+export default FishingExpeditionCustomBackground;

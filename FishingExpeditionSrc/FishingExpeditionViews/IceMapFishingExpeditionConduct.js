@@ -4,13 +4,14 @@ import {
   StyleSheet,
   Image,
   ImageBackground,
-  TouchableOpacity,
+  TouchableOpacity as CustomTouchable,
   Dimensions,
 } from 'react-native';
 import React, { useState } from 'react';
-import IceMapFishingExpeditionLayout from '../IceMapFishingExpeditionComponents/IceMapFishingExpeditionLayout';
+
 import { useNavigation } from '@react-navigation/native';
-import { iceMapRules } from '../IceMapFishingExpeditionConsts/iceMapRules';
+import { iceMapRules } from '../FishingExpeditionConsts/iceMapRules';
+import FishingExpeditionCustomBackground from '../FishingExpeditionCustomComponents/FishingExpeditionCustomBackground';
 
 const { height } = Dimensions.get('window');
 
@@ -19,16 +20,16 @@ const IceMapFishingExpeditionConduct = () => {
   const [iceMapShowRules, setIceMapShowRules] = useState(false);
 
   return (
-    <IceMapFishingExpeditionLayout>
+    <FishingExpeditionCustomBackground>
       <View style={styles.iceMapContainer}>
         <View style={styles.iceMapHeaderRow}>
-          <TouchableOpacity
+          <CustomTouchable
             onPress={() => navigation.goBack()}
             style={styles.iceMapBackBtn}
             activeOpacity={0.7}
           >
             <Image source={require('../../assets/images/icemapbackbtn.png')} />
-          </TouchableOpacity>
+          </CustomTouchable>
 
           <Text style={styles.iceMapHeaderTitle}>RULES OF CONDUCT</Text>
         </View>
@@ -49,7 +50,7 @@ const IceMapFishingExpeditionConduct = () => {
                 they’re what make every winter trip safe.
               </Text>
 
-              <TouchableOpacity
+              <CustomTouchable
                 onPress={() => setIceMapShowRules(true)}
                 activeOpacity={0.9}
               >
@@ -59,7 +60,7 @@ const IceMapFishingExpeditionConduct = () => {
                 >
                   <Text style={styles.iceMapGoodBtnText}>GOOD</Text>
                 </ImageBackground>
-              </TouchableOpacity>
+              </CustomTouchable>
             </ImageBackground>
           </View>
         )}
@@ -81,7 +82,7 @@ const IceMapFishingExpeditionConduct = () => {
           </View>
         )}
       </View>
-    </IceMapFishingExpeditionLayout>
+    </FishingExpeditionCustomBackground>
   );
 };
 

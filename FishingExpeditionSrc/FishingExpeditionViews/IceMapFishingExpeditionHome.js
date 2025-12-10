@@ -5,25 +5,30 @@ import {
   ImageBackground,
   StyleSheet,
   Text,
-  TouchableOpacity,
+  TouchableOpacity as CustomTouchable,
   View,
 } from 'react-native';
-import IceMapFishingExpeditionLayout from '../IceMapFishingExpeditionComponents/IceMapFishingExpeditionLayout';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { useStore } from '../IceMapFishingExpeditionStore/iceMapFishingExpeditionContext';
+import { useStore } from '../FishingExpeditionStore/iceMapFishingExpeditionContext';
 import Sound from 'react-native-sound';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import FishingExpeditionCustomBackground from '../FishingExpeditionCustomComponents/FishingExpeditionCustomBackground';
 
 const { height } = Dimensions.get('window');
 
 const IceMapFishingExpeditionHome = () => {
   const navigation = useNavigation();
   const { isEnabledIceMapMusic, setIsEnabledIceMapMusic } = useStore();
-
   const [iceMapTrackIndex, setIceMapTrackIndex] = useState(0);
   const [iceMapSound, setIceMapSound] = useState(null);
 
   const iceMapTracks = ['summer-nights-203094.mp3', 'summer-nights-203094.mp3'];
+
+  useFocusEffect(
+    useCallback(() => {
+      iceMapLoadMusicState();
+    }, []),
+  );
 
   useEffect(() => {
     iceMapPlayTrack(iceMapTrackIndex);
@@ -62,12 +67,6 @@ const IceMapFishingExpeditionHome = () => {
     });
   };
 
-  useFocusEffect(
-    useCallback(() => {
-      iceMapLoadMusicState();
-    }, []),
-  );
-
   useEffect(() => {
     const iceMapApplyVolume = async () => {
       try {
@@ -103,7 +102,7 @@ const IceMapFishingExpeditionHome = () => {
   };
 
   return (
-    <IceMapFishingExpeditionLayout>
+    <FishingExpeditionCustomBackground>
       <View style={styles.iceMapContainer}>
         <ImageBackground
           source={require('../../assets/images/icemapwlccnt.png')}
@@ -115,7 +114,7 @@ const IceMapFishingExpeditionHome = () => {
                 source={require('../../assets/images/icemapminilogo.png')}
               />
 
-              <TouchableOpacity
+              <CustomTouchable
                 activeOpacity={0.7}
                 onPress={() =>
                   navigation.navigate('IceMapFishingExpeditionSaved')
@@ -124,7 +123,7 @@ const IceMapFishingExpeditionHome = () => {
                 <Image
                   source={require('../../assets/images/icemapsaved.png')}
                 />
-              </TouchableOpacity>
+              </CustomTouchable>
             </View>
 
             <Text style={styles.iceMapWelcomeTitle}>
@@ -135,7 +134,7 @@ const IceMapFishingExpeditionHome = () => {
           </View>
         </ImageBackground>
 
-        <TouchableOpacity
+        <CustomTouchable
           activeOpacity={0.8}
           onPress={() => navigation.navigate('IceMapFishingExpeditionTips')}
         >
@@ -143,10 +142,10 @@ const IceMapFishingExpeditionHome = () => {
             source={require('../../assets/images/icemaphometips.png')}
             style={styles.iceMapTipsBtn}
           />
-        </TouchableOpacity>
+        </CustomTouchable>
 
         <View style={styles.iceMapButtonsWrapper}>
-          <TouchableOpacity
+          <CustomTouchable
             activeOpacity={0.8}
             onPress={() =>
               navigation.navigate('IceMapFishingExpeditionPlacesList')
@@ -158,9 +157,9 @@ const IceMapFishingExpeditionHome = () => {
             >
               <Text style={styles.iceMapBtnTitle}>List of places</Text>
             </ImageBackground>
-          </TouchableOpacity>
+          </CustomTouchable>
 
-          <TouchableOpacity
+          <CustomTouchable
             activeOpacity={0.8}
             onPress={() =>
               navigation.navigate('IceMapFishingExpeditionConduct')
@@ -172,9 +171,9 @@ const IceMapFishingExpeditionHome = () => {
             >
               <Text style={styles.iceMapBtnTitle}>Rules of conduct</Text>
             </ImageBackground>
-          </TouchableOpacity>
+          </CustomTouchable>
 
-          <TouchableOpacity
+          <CustomTouchable
             activeOpacity={0.8}
             onPress={() =>
               navigation.navigate('IceMapFishingExpeditionSettings')
@@ -186,10 +185,10 @@ const IceMapFishingExpeditionHome = () => {
             >
               <Text style={styles.iceMapBtnTitle}>Settings</Text>
             </ImageBackground>
-          </TouchableOpacity>
+          </CustomTouchable>
         </View>
       </View>
-    </IceMapFishingExpeditionLayout>
+    </FishingExpeditionCustomBackground>
   );
 };
 

@@ -1,28 +1,14 @@
-import IceMapFishingExpeditionStack from './IceMapFishingExpedition/IceMapFishingExpeditionNavigation/IceMapFishingExpeditionStack';
-import IceMapFishingExpeditionLoader from './IceMapFishingExpedition/IceMapFishingExpeditionComponents/IceMapFishingExpeditionLoader';
-import { ContextProvider } from './IceMapFishingExpedition/IceMapFishingExpeditionStore/iceMapFishingExpeditionContext';
-import { NavigationContainer } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
+import FishingExpeditionNav from './FishingExpeditionSrc/FishingExpeditionRoutes/FishingExpeditionNav';
+import { ContextProvider as FishingExpeditionContext } from './FishingExpeditionSrc/FishingExpeditionStore/iceMapFishingExpeditionContext';
+import { NavigationContainer as FishingExpeditionNavigation } from '@react-navigation/native';
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3500);
-  }, []);
-
   return (
-    <NavigationContainer>
-      <ContextProvider>
-        {isLoading ? (
-          <IceMapFishingExpeditionLoader />
-        ) : (
-          <IceMapFishingExpeditionStack />
-        )}
-      </ContextProvider>
-    </NavigationContainer>
+    <FishingExpeditionNavigation>
+      <FishingExpeditionContext>
+        <FishingExpeditionNav />
+      </FishingExpeditionContext>
+    </FishingExpeditionNavigation>
   );
 };
 

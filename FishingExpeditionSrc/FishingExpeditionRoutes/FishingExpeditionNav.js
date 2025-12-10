@@ -1,17 +1,22 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import IceMapFishingExpeditionOnboard from '../IceMapFishingExpeditionScreens/IceMapFishingExpeditionOnboard';
-import IceMapFishingExpeditionHome from '../IceMapFishingExpeditionScreens/IceMapFishingExpeditionHome';
-import IceMapFishingExpeditionConduct from '../IceMapFishingExpeditionScreens/IceMapFishingExpeditionConduct';
-import IceMapFishingExpeditionPlacesList from '../IceMapFishingExpeditionScreens/IceMapFishingExpeditionPlacesList';
-import IceMapFishingExpeditionSaved from '../IceMapFishingExpeditionScreens/IceMapFishingExpeditionSaved';
-import IceMapFishingExpeditionTips from '../IceMapFishingExpeditionScreens/IceMapFishingExpeditionTips';
-import IceMapFishingExpeditionSettings from '../IceMapFishingExpeditionScreens/IceMapFishingExpeditionSettings';
+import IceMapFishingExpeditionOnboard from '../FishingExpeditionViews/IceMapFishingExpeditionOnboard';
+import IceMapFishingExpeditionHome from '../FishingExpeditionViews/IceMapFishingExpeditionHome';
+import IceMapFishingExpeditionConduct from '../FishingExpeditionViews/IceMapFishingExpeditionConduct';
+import IceMapFishingExpeditionPlacesList from '../FishingExpeditionViews/IceMapFishingExpeditionPlacesList';
+import IceMapFishingExpeditionSaved from '../FishingExpeditionViews/IceMapFishingExpeditionSaved';
+import IceMapFishingExpeditionTips from '../FishingExpeditionViews/IceMapFishingExpeditionTips';
+import IceMapFishingExpeditionSettings from '../FishingExpeditionViews/IceMapFishingExpeditionSettings';
+import FishingExpeditionCustomLoader from '../FishingExpeditionCustomComponents/FishingExpeditionCustomLoader';
 
 const Stack = createStackNavigator();
 
-const IceMapFishingExpeditionStack = () => {
+const FishingExpeditionNav = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen
+        name="FishingExpeditionCustomLoader"
+        component={FishingExpediionCustomLoader}
+      />
       <Stack.Screen
         name="IceMapFishingExpeditionOnboard"
         component={IceMapFishingExpeditionOnboard}
@@ -44,4 +49,4 @@ const IceMapFishingExpeditionStack = () => {
   );
 };
 
-export default IceMapFishingExpeditionStack;
+export default FishingExpeditionNav;

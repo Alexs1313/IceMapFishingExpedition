@@ -3,27 +3,25 @@ import {
   ImageBackground,
   StyleSheet,
   Text,
-  TouchableOpacity,
+  TouchableOpacity as CustomTouchable,
   View,
 } from 'react-native';
-import IceMapFishingExpeditionLayout from '../IceMapFishingExpeditionComponents/IceMapFishingExpeditionLayout';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import FishingExpeditionCustomBackground from '../FishingExpeditionCustomComponents/FishingExpeditionCustomBackground';
 
 const IceMapFishingExpeditionOnboard = () => {
   const [iceMapOnboardSlide, setIceMapOnboardSlide] = useState(0);
   const navigation = useNavigation();
 
   const handleNextIceMapSlide = () => {
-    if (iceMapOnboardSlide < 2) {
-      setIceMapOnboardSlide(iceMapOnboardSlide + 1);
-    } else {
-      navigation.replace('IceMapFishingExpeditionHome');
-    }
+    iceMapOnboardSlide < 2
+      ? setIceMapOnboardSlide(iceMapOnboardSlide + 1)
+      : navigation.replace('IceMapFishingExpeditionHome');
   };
 
   return (
-    <IceMapFishingExpeditionLayout>
+    <FishingExpeditionCustomBackground>
       <View style={styles.iceMapContainer}>
         {iceMapOnboardSlide === 0 && (
           <Image source={require('../../assets/images/icemapon1.png')} />
@@ -76,7 +74,7 @@ on the ice."
           </View>
         </ImageBackground>
 
-        <TouchableOpacity activeOpacity={0.8} onPress={handleNextIceMapSlide}>
+        <CustomTouchable activeOpacity={0.8} onPress={handleNextIceMapSlide}>
           <ImageBackground
             source={require('../../assets/images/icemapbtn.png')}
             style={{
@@ -94,9 +92,9 @@ on the ice."
               {iceMapOnboardSlide === 3 && 'START'}
             </Text>
           </ImageBackground>
-        </TouchableOpacity>
+        </CustomTouchable>
       </View>
-    </IceMapFishingExpeditionLayout>
+    </FishingExpeditionCustomBackground>
   );
 };
 
