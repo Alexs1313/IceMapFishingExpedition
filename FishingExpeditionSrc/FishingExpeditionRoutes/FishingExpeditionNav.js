@@ -15,7 +15,7 @@ const FishingExpeditionNav = () => {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name="FishingExpeditionCustomLoader"
-        component={FishingExpediionCustomLoader}
+        component={FishingExpeditionCustomLoader}
       />
       <Stack.Screen
         name="IceMapFishingExpeditionOnboard"

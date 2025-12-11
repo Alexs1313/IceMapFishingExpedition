@@ -51,31 +51,35 @@ const IceMapFishingExpeditionHome = () => {
 
     const iceMapTrackPath = iceMapTracks[index];
 
-    const newSound = new Sound(iceMapTrackPath, Sound.MAIN_BUNDLE, error => {
-      if (error) {
-        console.log('Error', error);
-        return;
-      }
-
-      newSound.play(success => {
-        if (success) {
-          setIceMapTrackIndex(prev => (prev + 1) % iceMapTracks.length);
+    const newGameSound = new Sound(
+      iceMapTrackPath,
+      Sound.MAIN_BUNDLE,
+      error => {
+        if (error) {
+          console.log('Error', error);
+          return;
         }
-      });
 
-      setIceMapSound(newSound);
-    });
+        newGameSound.play(success => {
+          if (success) {
+            setIceMapTrackIndex(prev => (prev + 1) % iceMapTracks.length);
+          }
+        });
+
+        setIceMapSound(newGameSound);
+      },
+    );
   };
 
   useEffect(() => {
     const iceMapApplyVolume = async () => {
       try {
-        const stored = await AsyncStorage.getItem('icemapmusic');
-        const parsed = JSON.parse(stored);
-        setIsEnabledIceMapMusic(parsed);
+        const savedData = await AsyncStorage.getItem('icemapmusic');
+        const parsedData = JSON.parse(savedData);
+        setIsEnabledIceMapMusic(parsedData);
 
         if (iceMapSound) {
-          iceMapSound.setVolume(parsed ? 1 : 0);
+          iceMapSound.setVolume(parsedData ? 1 : 0);
         }
       } catch (e) {
         console.log('Error', e);
@@ -93,9 +97,9 @@ const IceMapFishingExpeditionHome = () => {
 
   const iceMapLoadMusicState = async () => {
     try {
-      const stored = await AsyncStorage.getItem('icemapmusic');
-      const parsed = JSON.parse(stored);
-      setIsEnabledIceMapMusic(parsed);
+      const savedData = await AsyncStorage.getItem('icemapmusic');
+      const parsedData = JSON.parse(savedData);
+      setIsEnabledIceMapMusic(parsedData);
     } catch (e) {
       console.log('Error:', e);
     }
